@@ -5,6 +5,8 @@ I decided to do this to learn how to use Godot by recreating a simpler game that
 
 ## Controls
 
-WASD for movement
-J - Dash Button
-K - Jump Button
+- WASD for movement
+
+- J - Dash Button
+
+- K - Jump Button
