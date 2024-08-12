@@ -10,3 +10,5 @@ I decided to do this to learn how to use Godot by recreating a simpler game that
 - J - Dash Button
 
 - K - Jump Button
+
+This was made for educational purposes.
