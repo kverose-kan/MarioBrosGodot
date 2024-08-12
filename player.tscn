@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://cqoubmnhpjry5"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_8bdnl"]
+[ext_resource type="Shader" path="res://assets/shaders/smooth_pixel.gdshader" id="2_abqps"]
+[ext_resource type="Texture2D" uid="uid://6bwnjfsdax4k" path="res://assets/spritesheets/mario/smallmariosprites.png" id="3_prqxx"]
+[ext_resource type="Texture2D" uid="uid://3e4nkj20fwm7" path="res://assets/spritesheets/mario/smallmariowalkup.png" id="4_3b6ar"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2xyn"]
+shader = ExtResource("2_abqps")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqo3i"]
+atlas = ExtResource("3_prqxx")
+region = Rect2(0, 0, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t8ck"]
+atlas = ExtResource("3_prqxx")
+region = Rect2(0, 57, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy6cb"]
+atlas = ExtResource("3_prqxx")
+region = Rect2(0, 76, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mked"]
+atlas = ExtResource("3_prqxx")
+region = Rect2(0, 0, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ecs6"]
+atlas = ExtResource("3_prqxx")
+region = Rect2(0, 19, 16, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_agpav"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqo3i")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t8ck")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy6cb")
+}],
+"loop": true,
+"name": &"skid",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mked")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3b6ar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ecs6")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 16.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itbf0"]
+size = Vector2(7, 18.4375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8q8j"]
+size = Vector2(11, 14)
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 2
+script = ExtResource("1_8bdnl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 2
+material = SubResource("ShaderMaterial_r2xyn")
+sprite_frames = SubResource("SpriteFrames_agpav")
+animation = &"walk"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 0.21875)
+shape = SubResource("RectangleShape2D_itbf0")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_b8q8j")
+debug_color = Color(0.945662, 4.62055e-06, 0.591423, 0.42)
